@@ -8,19 +8,19 @@ export const inngest = new Inngest({ id: "quickcart-next" });
 // ingest function to save user data to a database
 export const syncUserCreation = inngest.createFunction(
     { 
-        id: 'sunc-user-from-clerk',
+        id: 'sync-user-from-clerk',
     },
     {
         event: 'clerk/user.created',
     },
     async ({ event }) => {
-        const { id, first_name, last_name,email_addresses,image_url,} = event.data;
+        const { id, first_name, last_name,email_addresses,} = event.data;
          const userData = {
 
             _id : id,
             email : email_addresses[0].email_address,
             name : first_name + " " + last_name,
-            imageUrl : image_url,
+            ImageUrl : "" ,
             
          }
 
@@ -44,7 +44,7 @@ export const syncUserUpdate = inngest.createFunction(
             _id : id,
             email : email_addresses[0].email_address,
             name : first_name + " " + last_name,
-            imageUrl : image_url,
+            ImageUrl : " ",
             
          }
             await connectDB();
